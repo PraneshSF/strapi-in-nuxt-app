@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>hi, you're on the landing page</h1>
+    <Navbar />
+    <HeroSection />
   </div>
 </template>
 
