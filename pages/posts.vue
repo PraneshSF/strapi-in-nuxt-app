@@ -13,16 +13,14 @@ console.log(posts)
 
 <template>
   <main class="container mx-auto min-h-screen max-w-3xl p-8">
-    <ul class="flex flex-col gap-y-4 items-end">
-      <div class="row">
-        <nuxt-link to="/posts">
-          <h2 class="text-xl font-semibold col">Posts</h2>
+    <h1 class="text-4xl font-bold mb-8">Posts</h1>
+    <ul class="flex flex-col gap-y-4">
+      <li v-for="post in posts" :key="post._id" class="hover:underline">
+        <nuxt-link :to="`/${post.slug.current}`">
+          <h2 class="text-xl font-semibold">{{ post.title }}</h2>
+          <p>{{ new Date(post.publishedAt).toLocaleDateString() }}</p>
         </nuxt-link>
-        <nuxt-link to="/landing">
-          <h2 class="text-xl font-semibold col">Landing Page</h2>
-        </nuxt-link>
-      </div>
-      
+      </li>
     </ul>
   </main>
 </template>

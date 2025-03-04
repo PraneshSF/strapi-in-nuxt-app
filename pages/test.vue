@@ -3,7 +3,7 @@ import type { SanityDocument } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]`;
+const POST_QUERY = groq`*[_type == "post"]{ _id, title, slug, image , body, publishedAt}[0]`;
 const { params } = useRoute();
 
 const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, params);
@@ -12,6 +12,9 @@ const urlFor = (source: SanityImageSource) =>
   projectId && dataset
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
+
+
+  console.log("post is",post)
 </script>
 
 <template>
@@ -22,16 +25,16 @@ const urlFor = (source: SanityImageSource) =>
     <a href="/" class="hover:underline">&larr; Back to posts</a>
     <img
       v-if="post.image"
-      :src="urlFor(post.image)?.width(550).height(310).url()"
+      :src="urlFor(post?.image)?.width(550).height(310).url()"
       :alt="post?.title"
       class="aspect-video rounded-xl"
       width="550"
       height="310"
     />
-    <h1 v-if="post.title" class="text-4xl font-bold mb-8">{{ post.title }}</h1>
+    <h1 v-if="post.title" class="text-4xl font-bold mb-8">{{ post?.title }}</h1>
     <div class="prose">
       <p v-if="post.publishedAt">
-        Published: {{ new Date(post.publishedAt).toLocaleDateString() }}
+        Published: {{ new Date(post?.publishedAt).toLocaleDateString() }}
       </p>
       <SanityContent v-if="post.body" :blocks="post.body" />
     </div>
