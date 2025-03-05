@@ -9,7 +9,7 @@
     <nav class="hidden md:flex space-x-6 text-gray-700">
       <a href="#" class="hover:text-green-500">Products</a>
       <a href="#" class="hover:text-green-500">Reviews</a>
-      <a href="#" class="hover:text-green-500">Blog</a>
+      <a href="/posts" class="hover:text-green-500">Blog</a>
       <a href="#" class="hover:text-green-500">About</a>
       <a href="#" class="hover:text-green-500">Help Centre</a>
       <a href="#" class="hover:text-green-500">Français</a>

@@ -1,28 +1,14 @@
-<script setup lang="ts">
-import type { SanityDocument } from "@sanity/client";
+<template>
+  <div>
+    <Navbar />
+    <HeroSection />
+  </div>
+</template>
 
-const POSTS_QUERY = groq`*[
-  _type == "post"
-  && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, image, publishedAt}`;
+<script lang="ts" setup>
 
-const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY);
-
-console.log(posts)
 </script>
 
-<template>
-  <main class="container mx-auto min-h-screen max-w-3xl p-8">
-    <ul class="flex flex-col gap-y-4 items-end">
-      <div class="row">
-        <nuxt-link to="/posts">
-          <h2 class="text-xl font-semibold col">Posts</h2>
-        </nuxt-link>
-        <nuxt-link to="/landing">
-          <h2 class="text-xl font-semibold col">Landing Page</h2>
-        </nuxt-link>
-      </div>
-      
-    </ul>
-  </main>
-</template>
+<style>
+
+</style>
