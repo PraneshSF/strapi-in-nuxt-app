@@ -7,12 +7,8 @@
 
     <!-- Navigation Links -->
     <nav class="hidden md:flex space-x-6 text-gray-700">
-      <a href="#" class="hover:text-green-500">Products</a>
-      <a href="#" class="hover:text-green-500">Reviews</a>
-      <a href="/posts" class="hover:text-green-500">Blog</a>
-      <a href="#" class="hover:text-green-500">About</a>
-      <a href="#" class="hover:text-green-500">Help Centre</a>
-      <a href="#" class="hover:text-green-500">Français</a>
+      <a v-for="link in headerData.links" :href="link.Link || '#'" :key="link.id" class="hover:text-green-500">{{link.Label}}</a>
+      <!-- <a href="#" class="hover:text-green-500">Français</a> -->
     </nav>
 
     <!-- Mobile Menu Icon -->
@@ -22,12 +18,7 @@
 
     <!-- Mobile Menu -->
     <div v-if="menuOpen" class="absolute top-16 left-0 w-full bg-white shadow-md p-4 md:hidden">
-      <a href="#" class="block py-2 hover:text-green-500">Products</a>
-      <a href="#" class="block py-2 hover:text-green-500">Reviews</a>
-      <a href="#" class="block py-2 hover:text-green-500">Blog</a>
-      <a href="#" class="block py-2 hover:text-green-500">About</a>
-      <a href="#" class="block py-2 hover:text-green-500">Help Centre</a>
-      <a href="#" class="block py-2 hover:text-green-500">Français</a>
+      <a v-for="link in headerData.links" :href="link.Link || '#'" :key="link.id" class="block py-2 hover:text-green-500">{{link.Label}}</a>
     </div>
   </header>
 </template>
@@ -40,6 +31,15 @@ const menuOpen = ref(false)
 function toggleMenu() {
   menuOpen.value = !menuOpen.value
 }
+
+const config = useRuntimeConfig(); 
+
+const { data: headerData, pending, error } = await useAsyncData('headerData', async () => {
+  const response = await $fetch(`${config.public.base_url}/headers/y7o0ocuzkyivi7xrg6scrgfv?populate=*`, {
+    headers: { Authorization: `Bearer ${config.public.accessToken}` },
+  });
+  return response?.data || {}; // Ensure it never returns undefined
+});
 </script>
 
 <style scoped>

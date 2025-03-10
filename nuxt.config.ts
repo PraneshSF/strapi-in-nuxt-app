@@ -6,4 +6,10 @@ export default defineNuxtConfig({
   sanity: {
     projectId: "vnlojsro",
   },
+  runtimeConfig: {
+    public: {
+      base_url: process.env.VUE_APP_BASE_URL,
+      accessToken: process.env.VUE_APP_ACCESS_TOKEN,
+    },
+  },
 });
