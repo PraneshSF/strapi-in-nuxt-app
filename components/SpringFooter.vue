@@ -20,13 +20,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-const menuOpen = ref(false)
-
-function toggleMenu() {
-  menuOpen.value = !menuOpen.value
-}
 
 const config = useRuntimeConfig(); 
 
