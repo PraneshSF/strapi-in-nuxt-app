@@ -25,6 +25,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRoute } from 'vue-router';
 
 const menuOpen = ref(false)
 
@@ -32,10 +33,13 @@ function toggleMenu() {
   menuOpen.value = !menuOpen.value
 }
 
+const route = useRoute(); // Get query params safely
 const config = useRuntimeConfig(); 
+const lang = computed(() => route.query.lang || 'en');
 
 const { data: headerData, pending, error } = await useAsyncData('headerData', async () => {
-  const response = await $fetch(`${config.public.base_url}/headers/y7o0ocuzkyivi7xrg6scrgfv?populate=*`, {
+  const langId = lang.value === 'en' ? 'y7o0ocuzkyivi7xrg6scrgfv' : 'jyd73ado4k3w8h1jef0kfgrq';
+  const response = await $fetch(`${config.public.base_url}/headers/${langId}?populate=*`, {
     headers: { Authorization: `Bearer ${config.public.accessToken}` },
   });
   return response?.data || {}; // Ensure it never returns undefined

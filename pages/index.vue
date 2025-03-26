@@ -2,6 +2,7 @@
   <div>
     <Navbar />
     <HeroSection />
+    <SpringFooter />
   </div>
 </template>
 
